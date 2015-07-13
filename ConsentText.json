@@ -1,0 +1,41 @@
+{
+    "sections":
+    [
+     {
+     "sectionType" : 0,
+     "sectionTitle" : "Welcome",
+     "sectionSummary" : "This is a fake study focused on learning about ResearchKit. In the process we will analyze links between physical activity and happiness.",
+     "sectionDetail" : "This is a fake study focused on learning about ResearchKit. In the process we will analyze links between physical activity and happiness. <BR> We hope you enjoy the study",
+     },
+     {
+     "sectionType" : 1,
+     "sectionTitle" : "Data Gathering",
+     "sectionSummary" : "Throughout this study the app will collect information from your iPhone about the number of steps you take each day.",
+     "sectionDetail" : "Throughout this study the app will collect information from your iPhone about the number of steps you take each day. We will also ask you questions from time-to-time"
+     },
+     {
+     "sectionType" : 2,
+     "sectionTitle" : "Privacy",
+     "sectionSummary" : "We will keep your data private.",
+     "sectionDetail" : "We will keep your data private, Seriously.",
+     },
+     {
+     "sectionType" : 3,
+     "sectionTitle" : "Data Use",
+     "sectionSummary" : "Your data will only be used for the research purposes associated with this study. Your data will not be shared with any commercial enity without your prior written consent.",
+     "sectionDetail" : "Your data will <b>only be used for the research purposes associated with this study</b>. Your data will not be shared with any commercial enity without your prior written consent.<BR><BR>For more information please contact the study organizer.",
+     },
+     {
+     "sectionType" : 4,
+     "sectionTitle" : "Time Commitment",
+     "sectionSummary" : "This study should take less than 5 minutes per day over a 1 month period. Each day you will be asked to answer a few questions about your day.",
+     "sectionDetail" : "This study should take less than 5 minutes per day over a 1 month period. Each day you will be asked to answer a few questions about your day.",
+     },
+     {
+     "sectionType" : 7,
+     "sectionTitle" : "Withdraw",
+     "sectionSummary" : "If at anytime you wish to withdraw from the study simply delete the app from you iPhone.",
+     "sectionDetail" : "If at anytime you wish to withdraw from the study simply delete the app from you iPhone.",
+     }
+     ]
+}
