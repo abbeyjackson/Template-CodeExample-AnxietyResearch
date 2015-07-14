@@ -55,7 +55,7 @@
     ORKNumericAnswerFormat *ageAnswerFormat = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:@"years old"];
     ageAnswerFormat.minimum = @(18);
     ageAnswerFormat.maximum = @(100);
-    ORKFormItem *ageItem = [[ORKFormItem alloc]initWithIdentifier:@"AgeItem" text:@"What year were you born in?" answerFormat:ageAnswerFormat];
+    ORKFormItem *ageItem = [[ORKFormItem alloc]initWithIdentifier:@"AgeItem" text:@"How old are you?" answerFormat:ageAnswerFormat];
 //    ORKQuestionStep *birthYearQuestionStep = [ORKQuestionStep questionStepWithIdentifier:@"BirthYear" title:@"What year were you born in?" answer:birthYearAnswerFormat];
     [basicItems addObject:ageItem];
     
@@ -109,14 +109,13 @@
     ORKTextChoice *choiceSeven = [ORKTextChoice choiceWithText:@"Sleeping Less" detailText:@"When I am having many anxious days I tend to sleep a lot less than normal" value:@"sleepingLess" exclusive:NO];
     NSArray *sleepEffectsTextChoices = @[choiceOne, choiceTwo, choiceThree, choiceFour, choiceFive, choiceSix, choiceSeven];
     ORKAnswerFormat *sleepEffectsFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleMultipleChoice textChoices:sleepEffectsTextChoices];
-    ORKFormItem *sleepEffectsItem = [[ORKFormItem alloc]initWithIdentifier:@"SleepEffects" text:@"What effect does anxiety have on your sleep?" answerFormat:sleepEffectsFormat];
+    ORKFormItem *sleepEffectsItem = [[ORKFormItem alloc]initWithIdentifier:@"SleepEffects" text:@"What effect does anxiety have on your sleep? (select all that apply)" answerFormat:sleepEffectsFormat];
     [sleepItems addObject:sleepEffectsItem];
     
     sleepInfoStep.formItems = sleepItems;
     
 
     self.surveyTask =  [[ORKOrderedTask alloc] initWithIdentifier:@"survey" steps:@[personalInfoStep, anxietyInfoStep, sleepInfoStep]];
-    
 }
 
 
@@ -188,7 +187,7 @@
 - (IBAction)surveyTapped:(id)sender {
     
     ORKTaskViewController *surveyTaskViewController = [[ORKTaskViewController alloc] init];
-    surveyTaskViewController.task = self.consentTask;
+    surveyTaskViewController.task = self.surveyTask;
     surveyTaskViewController.delegate = self;
     [self presentViewController:surveyTaskViewController animated:YES completion:nil];
     
@@ -197,6 +196,25 @@
 - (void)taskViewController:(ORKTaskViewController *)taskViewController
        didFinishWithReason:(ORKTaskViewControllerFinishReason)reason
                      error:(NSError *)error {
+    
+    switch (reason) {
+        case ORKTaskViewControllerFinishReasonCompleted:{
+            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:taskViewController.result];
+            break;
+        }
+        case ORKTaskViewControllerFinishReasonFailed:{
+        }
+        case ORKTaskViewControllerFinishReasonDiscarded:{
+            break;
+        }
+        case ORKTaskViewControllerFinishReasonSaved:{
+            NSData *data = [taskViewController restorationData];
+            break;
+        }
+        default:
+            break;
+    }
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

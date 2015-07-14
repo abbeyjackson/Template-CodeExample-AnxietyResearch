@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oKR-RA-KUY">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oKR-RA-KUY">
                                 <rect key="frame" x="271" y="99" width="58" height="30"/>
                                 <state key="normal" title="Consent">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -25,7 +25,7 @@
                                     <action selector="consentTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="3H6-32-hIT"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G6L-hJ-Zgv">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G6L-hJ-Zgv">
                                 <rect key="frame" x="277" y="178" width="48" height="30"/>
                                 <state key="normal" title="Survey">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -36,6 +36,12 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="oKR-RA-KUY" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="GqK-vx-JBw"/>
+                            <constraint firstItem="G6L-hJ-Zgv" firstAttribute="top" secondItem="oKR-RA-KUY" secondAttribute="bottom" constant="49" id="Skg-c5-pQC"/>
+                            <constraint firstItem="G6L-hJ-Zgv" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="277" id="UfP-ea-ET2"/>
+                            <constraint firstItem="oKR-RA-KUY" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="79" id="ezL-az-PqN"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
