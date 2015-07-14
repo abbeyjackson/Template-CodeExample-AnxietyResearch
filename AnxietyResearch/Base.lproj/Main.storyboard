@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oKR-RA-KUY">
-                                <rect key="frame" x="271" y="99" width="58" height="30"/>
+                                <rect key="frame" x="271" y="70" width="58" height="30"/>
                                 <state key="normal" title="Consent">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -26,7 +26,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G6L-hJ-Zgv">
-                                <rect key="frame" x="277" y="178" width="48" height="30"/>
+                                <rect key="frame" x="276" y="150" width="48" height="30"/>
                                 <state key="normal" title="Survey">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -34,8 +34,8 @@
                                     <action selector="surveyTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="mUZ-bO-YCw"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9w1-ye-8HF">
-                                <rect key="frame" x="229" y="255" width="143" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9w1-ye-8HF">
+                                <rect key="frame" x="229" y="230" width="143" height="30"/>
                                 <state key="normal" title="Spatial Memory Task">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -43,8 +43,8 @@
                                     <action selector="spatialMemoryTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="n6g-Jd-vdG"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i5J-01-JQF">
-                                <rect key="frame" x="232" y="333" width="137" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i5J-01-JQF">
+                                <rect key="frame" x="232" y="310" width="137" height="30"/>
                                 <state key="normal" title="Finger Tapping Task">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -55,10 +55,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="oKR-RA-KUY" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="GqK-vx-JBw"/>
-                            <constraint firstItem="G6L-hJ-Zgv" firstAttribute="top" secondItem="oKR-RA-KUY" secondAttribute="bottom" constant="49" id="Skg-c5-pQC"/>
-                            <constraint firstItem="G6L-hJ-Zgv" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="277" id="UfP-ea-ET2"/>
-                            <constraint firstItem="oKR-RA-KUY" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="79" id="ezL-az-PqN"/>
+                            <constraint firstItem="G6L-hJ-Zgv" firstAttribute="top" secondItem="oKR-RA-KUY" secondAttribute="bottom" constant="50" id="XFT-QA-9dS"/>
+                            <constraint firstAttribute="centerX" secondItem="9w1-ye-8HF" secondAttribute="centerX" id="Xsr-Oe-P8e"/>
+                            <constraint firstItem="9w1-ye-8HF" firstAttribute="top" secondItem="G6L-hJ-Zgv" secondAttribute="bottom" constant="50" id="ab6-44-A4Z"/>
+                            <constraint firstItem="i5J-01-JQF" firstAttribute="top" secondItem="9w1-ye-8HF" secondAttribute="bottom" constant="50" id="i7x-2s-d4P"/>
+                            <constraint firstAttribute="centerX" secondItem="G6L-hJ-Zgv" secondAttribute="centerX" id="mFV-S2-pQa"/>
+                            <constraint firstAttribute="centerX" secondItem="oKR-RA-KUY" secondAttribute="centerX" id="qXu-q1-UnG"/>
+                            <constraint firstItem="oKR-RA-KUY" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="50" id="xBV-bD-cTa"/>
+                            <constraint firstAttribute="centerX" secondItem="i5J-01-JQF" secondAttribute="centerX" id="z5x-Ci-wcL"/>
                         </constraints>
                     </view>
                 </viewController>
