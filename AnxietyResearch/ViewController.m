@@ -10,11 +10,10 @@
 #import <ResearchKit/ResearchKit.h>
 
 @interface ViewController ()<ORKTaskViewControllerDelegate>
-
-@property (strong, nonatomic) ORKConsentDocument *consentDocument;
 @property (strong, nonatomic) ORKOrderedTask *consentTask;
-@property (strong, nonatomic) ORKStep *step;
 @property (strong, nonatomic) ORKOrderedTask *surveyTask;
+@property (strong, nonatomic) ORKOrderedTask *spatialMemoryTask;
+@property (strong, nonatomic) ORKOrderedTask *fingerTappingTask;
 @end
 
 @implementation ViewController
@@ -28,6 +27,65 @@
     
     [self showConsent];
     [self showSurvey];
+    [self showSpatialSpanMemoryTask];
+    [self showFingerTappingTask];
+}
+
+
+-(void)showConsent{
+    NSString *resource = [[NSBundle mainBundle] pathForResource:@"ConsentText" ofType:@"json"];
+    NSData *consentData = [NSData dataWithContentsOfFile:resource];
+    NSDictionary *parsedConsentData = [NSJSONSerialization JSONObjectWithData:consentData options:NSJSONReadingMutableContainers error:nil];
+    
+    NSArray *sectionDataParsedFromInputFile = [parsedConsentData objectForKey:@"sections"];
+    
+    NSMutableArray *consentSections = [NSMutableArray new];
+    for (NSDictionary *sectionDictionary in sectionDataParsedFromInputFile) {
+        
+        ORKConsentSectionType sectionType = [[sectionDictionary objectForKey:@"sectionType"] integerValue];
+        NSString *title = [sectionDictionary objectForKey:@"sectionTitle"];
+        NSString *summary = [sectionDictionary objectForKey:@"sectionSummary"];
+        NSString *detail = [sectionDictionary objectForKey:@"sectionDetail"];
+        
+        ORKConsentSection *section = [[ORKConsentSection alloc] initWithType:sectionType];
+        section.title = title;
+        section.summary = summary;
+        section.htmlContent = detail;
+        
+        ORKConsentSection *consentSection = section;
+        [consentSections addObject:consentSection];
+    }
+    
+    ORKConsentSection *introSection = [[ORKConsentSection alloc] initWithType:ORKConsentSectionTypeOnlyInDocument];
+    introSection.title = @"Intro Language";
+    introSection.htmlContent = @"This will only be shown in the consent document because this sectionType is map to ORKConsentSectionTypeOnlyInDocument. A consent document can include many sections with type ORKConsentSectionTypeOnlyInDocument. In this document there is a ORKConsentSectionTypeOnlyInDocument section as an intro and one as a closing section";
+    
+    [consentSections insertObject:introSection atIndex:0];
+    
+    
+    ORKConsentSection *closingSection = [[ORKConsentSection alloc] initWithType:ORKConsentSectionTypeOnlyInDocument];
+    closingSection.title = @"Additional Terms";
+    closingSection.htmlContent = @"Adding a ORKConsentSectionTypeOnlyInDocument at the end of a consent can be helpful to include any additional legal or related information.";
+    [consentSections addObject:closingSection];
+    
+    
+    ORKConsentDocument *consentDocument = [ORKConsentDocument new];
+    consentDocument.title = @"Demo Consent";
+    consentDocument.sections = consentSections;
+    
+    ORKConsentSignature *signature = [ORKConsentSignature new];
+    consentDocument.signatures = [NSArray arrayWithObject:signature];
+    
+    
+    ORKVisualConsentStep *visualConsentStep = [[ORKVisualConsentStep alloc] initWithIdentifier:@"visualConsentStep" document:consentDocument];
+    
+    
+    ORKConsentReviewStep *consentReviewStep = [[ORKConsentReviewStep alloc] initWithIdentifier:@"consentReviewStep" signature:consentDocument.signatures.firstObject inDocument:consentDocument];
+    consentReviewStep.text = @"Review Consent!";
+    consentReviewStep.reasonForConsent = @"I confirm that I consent to join this study";
+    
+    
+    self.consentTask =  [[ORKOrderedTask alloc] initWithIdentifier:@"consent" steps:@[visualConsentStep, consentReviewStep]];
 
 }
 
@@ -36,15 +94,15 @@
     ORKInstructionStep *instructionStep = [[ORKInstructionStep alloc]initWithIdentifier:@"IntroStep"];
     instructionStep.title = @"Selection Survey";
     instructionStep.text = @"This survey helps us understand your eligibility for the anxiety study";
-   
+    
     
     ORKFormStep *personalInfoStep = [[ORKFormStep alloc]initWithIdentifier:@"PersonalInfoStep" title:@"Your Information" text:@"Here we will collect basic personal information"];
     NSMutableArray *basicItems = [NSMutableArray new];
-   
+    
     ORKTextAnswerFormat *nameAnswerFormat = [[ORKTextAnswerFormat alloc]initWithMaximumLength:20];
     nameAnswerFormat.multipleLines = NO;
     ORKFormItem *nameItem = [[ORKFormItem alloc]initWithIdentifier:@"QuestionItem" text:@"What is your name?" answerFormat:nameAnswerFormat];
-//    ORKQuestionStep *nameQuestionStep = [ORKQuestionStep questionStepWithIdentifier:@"QuestionStep" title:@"What is your name?" answer:nameAnswerFormat];
+    //    ORKQuestionStep *nameQuestionStep = [ORKQuestionStep questionStepWithIdentifier:@"QuestionStep" title:@"What is your name?" answer:nameAnswerFormat];
     [basicItems addObject:nameItem];
     
     HKCharacteristicType *genderAnswerHKType = [HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBiologicalSex];
@@ -56,7 +114,7 @@
     ageAnswerFormat.minimum = @(18);
     ageAnswerFormat.maximum = @(100);
     ORKFormItem *ageItem = [[ORKFormItem alloc]initWithIdentifier:@"AgeItem" text:@"How old are you?" answerFormat:ageAnswerFormat];
-//    ORKQuestionStep *birthYearQuestionStep = [ORKQuestionStep questionStepWithIdentifier:@"BirthYear" title:@"What year were you born in?" answer:birthYearAnswerFormat];
+    //    ORKQuestionStep *birthYearQuestionStep = [ORKQuestionStep questionStepWithIdentifier:@"BirthYear" title:@"What year were you born in?" answer:birthYearAnswerFormat];
     [basicItems addObject:ageItem];
     
     ORKFormItem *basicInfoSeparator = [[ORKFormItem alloc]initWithSectionTitle:@"Basic Information"];
@@ -114,66 +172,22 @@
     
     sleepInfoStep.formItems = sleepItems;
     
-
+    
     self.surveyTask =  [[ORKOrderedTask alloc] initWithIdentifier:@"survey" steps:@[personalInfoStep, anxietyInfoStep, sleepInfoStep]];
 }
 
 
--(void)showConsent{
-    NSString *resource = [[NSBundle mainBundle] pathForResource:@"ConsentText" ofType:@"json"];
-    NSData *consentData = [NSData dataWithContentsOfFile:resource];
-    NSDictionary *parsedConsentData = [NSJSONSerialization JSONObjectWithData:consentData options:NSJSONReadingMutableContainers error:nil];
+-(void)showSpatialSpanMemoryTask{
     
-    NSArray *sectionDataParsedFromInputFile = [parsedConsentData objectForKey:@"sections"];
+    self.spatialMemoryTask = [ORKOrderedTask spatialSpanMemoryTaskWithIdentifier:@"SpatialMemory" intendedUseDescription:nil initialSpan:3 minimumSpan:2 maximumSpan:15 playSpeed:1 maxTests:5 maxConsecutiveFailures:3 customTargetImage:[UIImage imageNamed:@"UBClogo.png"] customTargetPluralName:@"logos" requireReversal:NO options:ORKPredefinedTaskOptionNone];
     
-    NSMutableArray *consentSections = [NSMutableArray new];
-    for (NSDictionary *sectionDictionary in sectionDataParsedFromInputFile) {
-        
-        ORKConsentSectionType sectionType = [[sectionDictionary objectForKey:@"sectionType"] integerValue];
-        NSString *title = [sectionDictionary objectForKey:@"sectionTitle"];
-        NSString *summary = [sectionDictionary objectForKey:@"sectionSummary"];
-        NSString *detail = [sectionDictionary objectForKey:@"sectionDetail"];
-        
-        ORKConsentSection *section = [[ORKConsentSection alloc] initWithType:sectionType];
-        section.title = title;
-        section.summary = summary;
-        section.htmlContent = detail;
-        
-        ORKConsentSection *consentSection = section;
-        [consentSections addObject:consentSection];
-    }
-    
-    ORKConsentSection *introSection = [[ORKConsentSection alloc] initWithType:ORKConsentSectionTypeOnlyInDocument];
-    introSection.title = @"Intro Language";
-    introSection.htmlContent = @"This will only be shown in the consent document because this sectionType is map to ORKConsentSectionTypeOnlyInDocument. A consent document can include many sections with type ORKConsentSectionTypeOnlyInDocument. In this document there is a ORKConsentSectionTypeOnlyInDocument section as an intro and one as a closing section";
-    
-    [consentSections insertObject:introSection atIndex:0];
-    
-    
-    ORKConsentSection *closingSection = [[ORKConsentSection alloc] initWithType:ORKConsentSectionTypeOnlyInDocument];
-    closingSection.title = @"Additional Terms";
-    closingSection.htmlContent = @"Adding a ORKConsentSectionTypeOnlyInDocument at the end of a consent can be helpful to include any additional legal or related information.";
-    [consentSections addObject:closingSection];
-    
-    
-    self.consentDocument = [ORKConsentDocument new];
-    self.consentDocument.title = @"Demo Consent";
-    self.consentDocument.sections = consentSections;
-    
-    ORKConsentSignature *signature = [ORKConsentSignature new];
-    self.consentDocument.signatures = [NSArray arrayWithObject:signature];
-    
-    
-    ORKVisualConsentStep *visualConsentStep = [[ORKVisualConsentStep alloc] initWithIdentifier:@"visualConsentStep" document:self.consentDocument];
-    
-    
-    ORKConsentReviewStep *consentReviewStep = [[ORKConsentReviewStep alloc] initWithIdentifier:@"consentReviewStep" signature:self.consentDocument.signatures.firstObject inDocument:self.consentDocument];
-    consentReviewStep.text = @"Review Consent!";
-    consentReviewStep.reasonForConsent = @"I confirm that I consent to join this study";
-    
-    
-    self.consentTask =  [[ORKOrderedTask alloc] initWithIdentifier:@"consent" steps:@[visualConsentStep, consentReviewStep]];
+}
 
+
+-(void)showFingerTappingTask{
+    
+    self.fingerTappingTask = [ORKOrderedTask twoFingerTappingIntervalTaskWithIdentifier:@"FingerTapping" intendedUseDescription:nil duration:30 options:ORKPredefinedTaskOptionNone];
+    
 }
 
 - (IBAction)consentTapped:(id)sender {
@@ -193,9 +207,20 @@
     
 }
 
-- (IBAction)tasksTapped:(id)sender {
+- (IBAction)spatialMemoryTapped:(id)sender {
+    
+    ORKTaskViewController *spatialMemoryTaskViewController = [[ORKTaskViewController alloc] init];
+    spatialMemoryTaskViewController.task = self.spatialMemoryTask;
+    spatialMemoryTaskViewController.delegate = self;
+    [self presentViewController:spatialMemoryTaskViewController animated:YES completion:nil];
 
-
+}
+- (IBAction)fingerTappingTapped:(id)sender {
+    
+    ORKTaskViewController *fingerTappingTaskViewController = [[ORKTaskViewController alloc] init];
+    fingerTappingTaskViewController.task = self.fingerTappingTask;
+    fingerTappingTaskViewController.delegate = self;
+    [self presentViewController:fingerTappingTaskViewController animated:YES completion:nil];
 }
 
 - (void)taskViewController:(ORKTaskViewController *)taskViewController

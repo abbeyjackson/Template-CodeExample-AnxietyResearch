@@ -35,12 +35,21 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9w1-ye-8HF">
-                                <rect key="frame" x="278" y="257" width="39" height="30"/>
-                                <state key="normal" title="Tasks">
+                                <rect key="frame" x="229" y="255" width="143" height="30"/>
+                                <state key="normal" title="Spatial Memory Task">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="tasksTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Pwr-dy-1Wm"/>
+                                    <action selector="spatialMemoryTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="n6g-Jd-vdG"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i5J-01-JQF">
+                                <rect key="frame" x="232" y="333" width="137" height="30"/>
+                                <state key="normal" title="Finger Tapping Task">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="fingerTappingTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ygc-1Z-ZgW"/>
                                 </connections>
                             </button>
                         </subviews>
