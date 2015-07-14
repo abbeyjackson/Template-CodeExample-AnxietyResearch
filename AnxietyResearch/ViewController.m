@@ -179,10 +179,19 @@
 
 - (IBAction)consentTapped:(id)sender {
     
-    ORKTaskViewController *taskViewController = [[ORKTaskViewController alloc] init];
-    taskViewController.task = self.consentTask;
-    taskViewController.delegate = self;
-    [self presentViewController:taskViewController animated:YES completion:nil];
+    ORKTaskViewController *consentTaskViewController = [[ORKTaskViewController alloc] init];
+    consentTaskViewController.task = self.consentTask;
+    consentTaskViewController.delegate = self;
+    [self presentViewController:consentTaskViewController animated:YES completion:nil];
+}
+
+- (IBAction)surveyTapped:(id)sender {
+    
+    ORKTaskViewController *surveyTaskViewController = [[ORKTaskViewController alloc] init];
+    surveyTaskViewController.task = self.consentTask;
+    surveyTaskViewController.delegate = self;
+    [self presentViewController:surveyTaskViewController animated:YES completion:nil];
+    
 }
 
 - (void)taskViewController:(ORKTaskViewController *)taskViewController
