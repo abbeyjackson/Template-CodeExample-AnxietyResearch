@@ -16,53 +16,82 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oKR-RA-KUY">
-                                <rect key="frame" x="271" y="70" width="58" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oKR-RA-KUY">
+                                <rect key="frame" x="260" y="322" width="78" height="36"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <size key="titleShadowOffset" width="-2" height="1"/>
                                 <state key="normal" title="Consent">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" red="0.0" green="0.50196081399917603" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="consentTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="3H6-32-hIT"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G6L-hJ-Zgv">
-                                <rect key="frame" x="276" y="150" width="48" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G6L-hJ-Zgv">
+                                <rect key="frame" x="267" y="382" width="64" height="36"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <size key="titleShadowOffset" width="-2" height="1"/>
                                 <state key="normal" title="Survey">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" red="0.0" green="0.50196081399917603" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="surveyTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="mUZ-bO-YCw"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9w1-ye-8HF">
-                                <rect key="frame" x="229" y="230" width="143" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9w1-ye-8HF">
+                                <rect key="frame" x="204" y="442" width="192" height="36"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <size key="titleShadowOffset" width="-2" height="1"/>
                                 <state key="normal" title="Spatial Memory Task">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" red="0.0" green="0.50196081399917603" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="spatialMemoryTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="n6g-Jd-vdG"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i5J-01-JQF">
-                                <rect key="frame" x="232" y="310" width="137" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i5J-01-JQF">
+                                <rect key="frame" x="208" y="502" width="185" height="36"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <size key="titleShadowOffset" width="-2" height="1"/>
                                 <state key="normal" title="Finger Tapping Task">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" red="0.0" green="0.50196081399917603" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="fingerTappingTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ygc-1Z-ZgW"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to UBC's Anxiety Study" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pap-KF-ciw">
+                                <rect key="frame" x="199" y="242" width="201" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.0" green="0.50196081399917603" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UBClogo" translatesAutoresizingMaskIntoConstraints="NO" id="N7r-WT-Jrd">
+                                <rect key="frame" x="176" y="50" width="249" height="172"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="249" id="ocW-Q1-ZNw"/>
+                                    <constraint firstAttribute="height" constant="172" id="r97-If-I94"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="G6L-hJ-Zgv" firstAttribute="top" secondItem="oKR-RA-KUY" secondAttribute="bottom" constant="50" id="XFT-QA-9dS"/>
-                            <constraint firstAttribute="centerX" secondItem="9w1-ye-8HF" secondAttribute="centerX" id="Xsr-Oe-P8e"/>
-                            <constraint firstItem="9w1-ye-8HF" firstAttribute="top" secondItem="G6L-hJ-Zgv" secondAttribute="bottom" constant="50" id="ab6-44-A4Z"/>
-                            <constraint firstItem="i5J-01-JQF" firstAttribute="top" secondItem="9w1-ye-8HF" secondAttribute="bottom" constant="50" id="i7x-2s-d4P"/>
-                            <constraint firstAttribute="centerX" secondItem="G6L-hJ-Zgv" secondAttribute="centerX" id="mFV-S2-pQa"/>
-                            <constraint firstAttribute="centerX" secondItem="oKR-RA-KUY" secondAttribute="centerX" id="qXu-q1-UnG"/>
-                            <constraint firstItem="oKR-RA-KUY" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="50" id="xBV-bD-cTa"/>
-                            <constraint firstAttribute="centerX" secondItem="i5J-01-JQF" secondAttribute="centerX" id="z5x-Ci-wcL"/>
+                            <constraint firstItem="G6L-hJ-Zgv" firstAttribute="top" secondItem="oKR-RA-KUY" secondAttribute="bottom" constant="30" id="81s-k2-p79"/>
+                            <constraint firstItem="pap-KF-ciw" firstAttribute="top" secondItem="N7r-WT-Jrd" secondAttribute="bottom" constant="20" id="Ghe-Ta-iLY"/>
+                            <constraint firstAttribute="centerX" secondItem="9w1-ye-8HF" secondAttribute="centerX" id="Igq-Iw-qof"/>
+                            <constraint firstItem="oKR-RA-KUY" firstAttribute="top" secondItem="pap-KF-ciw" secondAttribute="bottom" constant="50" id="Jvb-UX-EV7"/>
+                            <constraint firstItem="9w1-ye-8HF" firstAttribute="top" secondItem="G6L-hJ-Zgv" secondAttribute="bottom" constant="30" id="K1q-Gy-08e"/>
+                            <constraint firstAttribute="centerX" secondItem="pap-KF-ciw" secondAttribute="centerX" id="KGe-Tt-yuK"/>
+                            <constraint firstAttribute="centerX" secondItem="G6L-hJ-Zgv" secondAttribute="centerX" id="NcV-Xu-Bdt"/>
+                            <constraint firstAttribute="centerX" secondItem="N7r-WT-Jrd" secondAttribute="centerX" id="Qhr-Ro-wX3"/>
+                            <constraint firstItem="N7r-WT-Jrd" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="30" id="Xaf-B1-eUM"/>
+                            <constraint firstItem="i5J-01-JQF" firstAttribute="top" secondItem="9w1-ye-8HF" secondAttribute="bottom" constant="30" id="ckT-te-A8J"/>
+                            <constraint firstAttribute="centerX" secondItem="oKR-RA-KUY" secondAttribute="centerX" id="h81-mY-wXa"/>
+                            <constraint firstAttribute="centerX" secondItem="i5J-01-JQF" secondAttribute="centerX" id="vxl-aC-HhF"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -70,4 +99,7 @@
             </objects>
         </scene>
     </scenes>
+    <resources>
+        <image name="UBClogo" width="413" height="563"/>
+    </resources>
 </document>
