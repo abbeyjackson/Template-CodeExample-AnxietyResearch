@@ -14,7 +14,7 @@
 @property (strong, nonatomic) ORKConsentDocument *consentDocument;
 @property (strong, nonatomic) ORKOrderedTask *consentTask;
 @property (strong, nonatomic) ORKStep *step;
-@property (strong, nonatomic) ORKOrderedTask *stepTask;
+@property (strong, nonatomic) ORKOrderedTask *surveyTask;
 @end
 
 @implementation ViewController
@@ -34,25 +34,88 @@
 
 -(void)showSurvey{
     ORKInstructionStep *instructionStep = [[ORKInstructionStep alloc]initWithIdentifier:@"IntroStep"];
-    instructionStep.title = @"The Questions Three";
-    instructionStep.text = @"What came first? The chicken or the egg?";
+    instructionStep.title = @"Selection Survey";
+    instructionStep.text = @"This survey helps us understand your eligibility for the anxiety study";
+   
+    
+    ORKFormStep *personalInfoStep = [[ORKFormStep alloc]initWithIdentifier:@"PersonalInfoStep" title:@"Your Information" text:@"Here we will collect basic personal information"];
+    NSMutableArray *basicItems = [NSMutableArray new];
+   
+    ORKTextAnswerFormat *nameAnswerFormat = [[ORKTextAnswerFormat alloc]initWithMaximumLength:20];
+    nameAnswerFormat.multipleLines = NO;
+    ORKFormItem *nameItem = [[ORKFormItem alloc]initWithIdentifier:@"QuestionItem" text:@"What is your name?" answerFormat:nameAnswerFormat];
+//    ORKQuestionStep *nameQuestionStep = [ORKQuestionStep questionStepWithIdentifier:@"QuestionStep" title:@"What is your name?" answer:nameAnswerFormat];
+    [basicItems addObject:nameItem];
+    
+    HKCharacteristicType *genderAnswerHKType = [HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBiologicalSex];
+    ORKAnswerFormat *genderFormat = [ORKHealthKitCharacteristicTypeAnswerFormat answerFormatWithCharacteristicType:genderAnswerHKType];
+    ORKFormItem *genderItem = [[ORKFormItem alloc]initWithIdentifier:@"GenderItem" text:@"Gender" answerFormat:genderFormat];
+    [basicItems addObject:genderItem];
+    
+    ORKNumericAnswerFormat *ageAnswerFormat = [ORKNumericAnswerFormat integerAnswerFormatWithUnit:@"years old"];
+    ageAnswerFormat.minimum = @(18);
+    ageAnswerFormat.maximum = @(100);
+    ORKFormItem *ageItem = [[ORKFormItem alloc]initWithIdentifier:@"AgeItem" text:@"What year were you born in?" answerFormat:ageAnswerFormat];
+//    ORKQuestionStep *birthYearQuestionStep = [ORKQuestionStep questionStepWithIdentifier:@"BirthYear" title:@"What year were you born in?" answer:birthYearAnswerFormat];
+    [basicItems addObject:ageItem];
+    
+    ORKFormItem *basicInfoSeparator = [[ORKFormItem alloc]initWithSectionTitle:@"Basic Information"];
+    [basicItems addObject:basicInfoSeparator];
+    
+    HKCharacteristicType *bloodTypeHKType = [HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierBloodType];
+    ORKAnswerFormat *bloodTypeFormat = [ORKHealthKitCharacteristicTypeAnswerFormat answerFormatWithCharacteristicType:bloodTypeHKType];
+    ORKFormItem *bloodTypeItem = [[ORKFormItem alloc]initWithIdentifier:@"BloodType" text:@"What is your blood type?" answerFormat:bloodTypeFormat];
+    [basicItems addObject:bloodTypeItem];
+    
+    HKCharacteristicType *dateOfBirthType = [HKCharacteristicType characteristicTypeForIdentifier:HKCharacteristicTypeIdentifierDateOfBirth];
+    ORKAnswerFormat *dateOfBirthFormat = [ORKHealthKitCharacteristicTypeAnswerFormat answerFormatWithCharacteristicType:dateOfBirthType];
+    ORKFormItem *dateOfBirthItem = [[ORKFormItem alloc]initWithIdentifier:@"DateOfBirth" text:@"What is your date of birth?" answerFormat:dateOfBirthFormat];
+    [basicItems addObject:dateOfBirthItem];
+    
+    personalInfoStep.formItems = basicItems;
     
     
+    ORKFormStep *anxietyInfoStep = [[ORKFormStep alloc]initWithIdentifier:@"AnxietyInfoStep" title:@"Anxiety Survey" text:@"Here we will collect basic information about your anxiety"];
+    NSMutableArray *anxietyItems = [NSMutableArray new];
     
-    // add instructions step
+    ORKAnswerFormat *hasAnxietyFormat = [ORKAnswerFormat booleanAnswerFormat];
+    ORKFormItem *hasAnxietyItem = [[ORKFormItem alloc]initWithIdentifier:@"HasAnxiety" text:@"Do you have anxiety?" answerFormat:hasAnxietyFormat];
+    [anxietyItems addObject:hasAnxietyItem];
+    
+    ORKAnswerFormat *anxietyScaleFormat = [ORKAnswerFormat scaleAnswerFormatWithMaximumValue:10 minimumValue:0 defaultValue:5 step:1 vertical:NO maximumValueDescription:@"Unbearable" minimumValueDescription:@"No Anxiety"];
+    ORKFormItem *anxietyScaleItem = [[ORKFormItem alloc]initWithIdentifier:@"AnxietyScale" text:@"On a scale of 0 to 10, how do you rate your anxiety on a normal day?" answerFormat:anxietyScaleFormat];
+    [anxietyItems addObject:anxietyScaleItem];
+    
+    anxietyInfoStep.formItems = anxietyItems;
     
     
-    // add name question
+    ORKFormStep *sleepInfoStep = [[ORKFormStep alloc]initWithIdentifier:@"SleepInfoStep" title:@"Sleep Survey" text:@"Here we will collect basic information about your sleep"];
+    NSMutableArray *sleepItems = [NSMutableArray new];
     
+    ORKImageChoice *badChoice = [ORKImageChoice choiceWithNormalImage:[UIImage imageNamed:@"Sad.png"] selectedImage:[UIImage imageNamed:@"Sad.png"] text:@"Bad" value:@"Bad"];
+    ORKImageChoice *neutralChoice = [ORKImageChoice choiceWithNormalImage:[UIImage imageNamed:@"Neutral.png"] selectedImage:[UIImage imageNamed:@"Neutral.png"] text:@"Okay" value:@"Okay"];
+    ORKImageChoice *goodChoice = [ORKImageChoice choiceWithNormalImage:[UIImage imageNamed:@"Happy.png"] selectedImage:[UIImage imageNamed:@"Happy.png"] text:@"Good" value:@"Good"];
+    NSArray *emoticonArray = @[badChoice, neutralChoice, goodChoice];
+    ORKAnswerFormat *sleepQualityFormat = [ORKAnswerFormat choiceAnswerFormatWithImageChoices:emoticonArray];
+    ORKFormItem *sleepQualityItem = [[ORKFormItem alloc]initWithIdentifier:@"SleepQuality" text:@"How would you rate your sleep overall?" answerFormat:sleepQualityFormat];
+    [sleepItems addObject:sleepQualityItem];
     
-    // add "what is your quest" question
+    ORKTextChoice *choiceOne = [ORKTextChoice choiceWithText:@"No Effect" detailText:@"I do not think anxiety affects my sleep" value:@"noEffect" exclusive:YES];
+    ORKTextChoice *choiceTwo = [ORKTextChoice choiceWithText:@"Falling Asleep" detailText:@"I have trouble falling asleep because of anxiety" value:@"fallingAsleep" exclusive:NO];
+    ORKTextChoice *choiceThree = [ORKTextChoice choiceWithText:@"Staying Asleep" detailText:@"I have trouble staying asleep because of anxiety" value:@"stayingAsleep" exclusive:NO];
+    ORKTextChoice *choiceFour = [ORKTextChoice choiceWithText:@"On Waking" detailText:@"I have trouble falling back asleep when I wake becaues of anxiety" value:@"onWaking" exclusive:NO];
+    ORKTextChoice *choiceFive = [ORKTextChoice choiceWithText:@"Taking Naps" detailText:@"When I am anxious I nap to escape the anxiety" value:@"takingNaps" exclusive:NO];
+    ORKTextChoice *choiceSix = [ORKTextChoice choiceWithText:@"Sleeping More" detailText:@"When I am having many anxious days I tend to sleep a lot more than normal" value:@"sleepingMore" exclusive:NO];
+    ORKTextChoice *choiceSeven = [ORKTextChoice choiceWithText:@"Sleeping Less" detailText:@"When I am having many anxious days I tend to sleep a lot less than normal" value:@"sleepingLess" exclusive:NO];
+    NSArray *sleepEffectsTextChoices = @[choiceOne, choiceTwo, choiceThree, choiceFour, choiceFive, choiceSix, choiceSeven];
+    ORKAnswerFormat *sleepEffectsFormat = [ORKAnswerFormat choiceAnswerFormatWithStyle:ORKChoiceAnswerStyleMultipleChoice textChoices:sleepEffectsTextChoices];
+    ORKFormItem *sleepEffectsItem = [[ORKFormItem alloc]initWithIdentifier:@"SleepEffects" text:@"What effect does anxiety have on your sleep?" answerFormat:sleepEffectsFormat];
+    [sleepItems addObject:sleepEffectsItem];
     
+    sleepInfoStep.formItems = sleepItems;
     
-    // add color question step
-    
-    
-    // add summary step
-    
+
+    self.surveyTask =  [[ORKOrderedTask alloc] initWithIdentifier:@"survey" steps:@[personalInfoStep, anxietyInfoStep, sleepInfoStep]];
     
 }
 
