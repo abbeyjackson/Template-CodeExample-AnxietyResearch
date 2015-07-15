@@ -20,16 +20,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
     
     [self showConsent];
     [self showSurvey];
     [self showSpatialSpanMemoryTask];
     [self showFingerTappingTask];
 }
+
 
 
 -(void)showConsent{
